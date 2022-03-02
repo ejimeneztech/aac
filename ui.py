@@ -9,11 +9,11 @@ class UserInterface:
         self.window.title("AAC")
         self.window.config(padx=150, pady=100, bg=THEME_COLOR)
 
-        self.canvas = Canvas(width=100, height=50, bg="white")
-        self.output_text = self.canvas.create_text(150, 125, text="Test", width=280, font=("Arial", 20, "italic"))
-        self.canvas.grid(row=0, column=0)
+        self.text_box = Canvas(width=450, height=50, bg="white")
+        self.output_text = self.text_box.create_text(150, 125, text="Test", width=280, font=("Arial", 20, "italic"))
+        self.text_box.grid(row=0, column=0, columnspan=2)
 
-        self.button = Button()
-        self.button.grid(row=10, column=1)
+        self.button = Button(text="Say Hello!")
+        self.button.grid(row=2, column=0, pady=10)
 
         self.window.mainloop()
