@@ -4,7 +4,8 @@ THEME_COLOR = "#375362"
 
 class UserInterface:
 
-    def __init__(self):
+    def __init__(self, speaker):
+        self.speaker = speaker
         self.window = Tk()
         self.window.title("AAC")
         self.window.config(padx=150, pady=100, bg=THEME_COLOR)
@@ -13,7 +14,7 @@ class UserInterface:
         self.output_text = self.text_box.create_text(150, 125, text="Test", width=280, font=("Arial", 20, "italic"))
         self.text_box.grid(row=0, column=0, columnspan=2)
 
-        self.button = Button(text="Say Hello!")
+        self.button = Button(text=f"{self.speaker.text}")
         self.button.grid(row=2, column=0, pady=10)
 
         self.window.mainloop()
