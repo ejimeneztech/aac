@@ -7,6 +7,5 @@ class Speaker:
     
 
     def play_audio(self):
-        # playsound('')
-        p = vlc.MediaPlayer("https://audiopost-test.s3.us-west-2.amazonaws.com/fec2458a-deff-4ef4-bc1a-8901f238d847.mp3")
+        p = vlc.MediaPlayer(self.url)
         p.play()
