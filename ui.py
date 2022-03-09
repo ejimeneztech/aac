@@ -1,23 +1,39 @@
 from cgitb import text
 from tkinter import *
+from speaker import Speaker
 
-THEME_COLOR = "#375362"
+THEME_COLOR = "black"
 
 class UserInterface:
 
-    def __init__(self, speaker):
+    def __init__(self, speaker: Speaker):
         self.speaker = speaker
         self.window = Tk()
         self.window.title("AAC")
         self.window.config(padx=150, pady=100, bg=THEME_COLOR)
 
-        # self.text_box = Canvas(width=450, height=50, bg="white")
-        # self.text = self.text_box.create_text(150, 125, text=f"{self.speaker.text}", width=280, font=("Arial", 20, "italic"))
-        # self.text_box.grid(row=0, column=0, columnspan=2)
+        self.canvas = Canvas( width= 500, height= 70, bg="white")
+        self.text = self.canvas.create_text(300, 50, text="", fill="black", font=('Helvetica 15 bold'))
+        self.canvas.grid(column=0, row=0)
+
+        #need to load from url https://discuss.python.org/t/tkinter-how-do-i-display-an-image-link-as-a-button/9567/2
+        self.image = PhotoImage(file="hello.gif")
 
 
-        self.button = Button(text=f"{self.speaker.text}", command=self.speaker.play_audio)
-        self.button.grid(row=2, column=0, pady=10)
 
+        #remove text field and add image from speaker.image
+        self.button = Button(image=self.image, command=self.speak)
+        self.button.grid(row=1, column=0, pady=10)
+
+        
 
         self.window.mainloop()
+
+
+        
+    def speak(self):
+        self.canvas.itemconfig(self.text, text= f"{self.speaker.text}")
+        self.speaker.play_audio()
+        
+
+    
