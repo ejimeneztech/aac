@@ -1,6 +1,8 @@
-from cgitb import text
 from tkinter import *
 from speaker import Speaker
+from PIL import ImageTk, Image
+import requests
+from io import BytesIO
 
 THEME_COLOR = "black"
 
@@ -16,14 +18,14 @@ class UserInterface:
         self.text = self.canvas.create_text(300, 50, text="", fill="black", font=('Helvetica 15 bold'))
         self.canvas.grid(column=0, row=0)
 
-        #need to load from url https://discuss.python.org/t/tkinter-how-do-i-display-an-image-link-as-a-button/9567/2
-        self.image = PhotoImage(file="hello.gif")
+        
+        img_url = self.speaker.image
+        response = requests.get(img_url)
+        img_data = response.content
+        img = ImageTk.PhotoImage(Image.open(BytesIO(img_data)))
 
-
-
-        #remove text field and add image from speaker.image
-        self.button = Button(image=self.image, command=self.speak)
-        self.button.grid(row=1, column=0, pady=10)
+        self.Button = Button(image=img, command=self.speak)
+        self.Button.grid(row=1, column=0, pady=10)
 
         
 
@@ -34,6 +36,13 @@ class UserInterface:
     def speak(self):
         self.canvas.itemconfig(self.text, text= f"{self.speaker.text}")
         self.speaker.play_audio()
-        
-
     
+
+    # def get_image(self):
+    #     self.img_url = "https://audiopost-test.s3.us-west-2.amazonaws.com/wave.jpeg"
+    #     self.response = requests.get(self.img_url)
+    #     self.img_data = self.response.content
+    #     self.img = ImageTk.PhotoImage(Image.open(BytesIO(self.img_data)))
+
+    #     self.Button.config(image=self.img)
+    #     self.Button.grid(row=1, column=0, pady=10)
