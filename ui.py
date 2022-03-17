@@ -1,6 +1,7 @@
 from tkinter import *
 from speaker import Speaker
 from PIL import ImageTk, Image
+
 import requests
 from io import BytesIO
 
@@ -18,12 +19,14 @@ class UserInterface:
         self.text = self.canvas.create_text(300, 50, text="", fill="black", font=('Helvetica 15 bold'))
         self.canvas.grid(column=0, row=0)
 
-        
+        #this will need to be done on the backend
         img_url = self.speaker.image
         response = requests.get(img_url)
         img_data = response.content
         img = ImageTk.PhotoImage(Image.open(BytesIO(img_data)))
 
+    
+        #repalce img with self.speaker.thumbnail
         self.Button = Button(image=img, command=self.speak)
         self.Button.grid(row=1, column=0, pady=10)
 
