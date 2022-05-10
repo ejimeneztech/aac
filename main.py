@@ -5,10 +5,9 @@ from speaker import Speaker
 
 
 
-
 post_text = data[0]["text"]
 post_url = data[0]["url"]
-post_image = 'https://audiopost-test.s3.us-west-2.amazonaws.com/wave.jpeg'
+post_image = data[0]["img_url"]
 
 
 

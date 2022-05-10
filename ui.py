@@ -20,14 +20,12 @@ class UserInterface:
         self.canvas.grid(column=0, row=0)
 
         #this will need to be done on the backend
-        img_url = self.speaker.image
-        response = requests.get(img_url)
-        img_data = response.content
-        img = ImageTk.PhotoImage(Image.open(BytesIO(img_data)))
+        self.img = self.speaker.image
+        
 
     
         #repalce img with self.speaker.thumbnail
-        self.Button = Button(image=img, command=self.speak)
+        self.Button = Button(image=self.img, command=self.speak)
         self.Button.grid(row=1, column=0, pady=10)
 
         
@@ -41,11 +39,3 @@ class UserInterface:
         self.speaker.play_audio()
     
 
-    # def get_image(self):
-    #     self.img_url = "https://audiopost-test.s3.us-west-2.amazonaws.com/wave.jpeg"
-    #     self.response = requests.get(self.img_url)
-    #     self.img_data = self.response.content
-    #     self.img = ImageTk.PhotoImage(Image.open(BytesIO(self.img_data)))
-
-    #     self.Button.config(image=self.img)
-    #     self.Button.grid(row=1, column=0, pady=10)
